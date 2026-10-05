@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+
+  /* Deep navy / royal blue academic palette */
+  --color-navy-950: #0a1633;
+  --color-navy-900: #0f2044;
+  --color-navy-800: #16295c;
+  --color-navy-700: #1e3a8a;
+  --color-navy-600: #2447a3;
+  --color-navy-100: #dbe3f5;
+  --color-navy-50: #eef2fb;
+
+  --color-brand-700: #1e3a8a;
+  --color-brand-600: #2447a3;
+  --color-brand-50: #eef2fb;
+
+  /* Gold accent — used sparingly */
+  --color-gold-600: #a8841a;
+  --color-gold-500: #c9a227;
+  --color-gold-400: #d9b545;
+  --color-gold-100: #faf0d3;
+  --color-gold-50: #fdf8e7;
+
+  --color-paper: #f7f8fa;
+  --color-line: #e4e8f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: #0a1633;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Restrained editorial selection */
+::selection {
+  background: #0f2044;
+  color: #fff;
+}
+
+/* Visible, consistent focus state for accessibility */
+:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 2px;
+}
+
+/* Prevent horizontal overflow from sliders */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.snap-row {
+  scroll-snap-type: x mandatory;
+}
+.snap-row > * {
+  scroll-snap-align: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

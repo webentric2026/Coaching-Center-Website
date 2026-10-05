@@ -1,0 +1,33 @@
+# Netlify configuration for the Vidya Academy Next.js site.
+#
+# Next.js is supported natively on Netlify (App Router, image optimization,
+# caching) — the Next.js Runtime installs automatically on build, so no
+# plugin needs to be listed here. Manually adding @netlify/plugin-nextjs
+# would opt out of automatic runtime updates, so it is intentionally absent.
+#
+# Deploy: push to your Git provider, then in Netlify Dashboard:
+#   New site from Git → build command `npm run build`, publish dir `.next`
+#   (both are also declared below, so the UI picks them up automatically).
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Next.js 16 requires Node >= 20.9 — pin the toolchain explicitly.
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--no-audit --no-fund"
+
+# Long-lived cache for Next.js immutable build assets (hashed filenames).
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Don't cache HTML pages at the edge — always serve the latest deploy.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
